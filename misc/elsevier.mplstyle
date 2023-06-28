@@ -1,0 +1,72 @@
+# style sheet for elsevier journals single colomns
+
+# Figure Properties
+figure.figsize: 3.2, 2.655 # aspect ratio 6:5, width=0.9\columnwidth
+figure.dpi: 1000           # figure dots per inch
+
+# Font Properties
+font.family: serif
+font.size: 9 # for IJNM
+text.usetex: True
+
+# Lines
+lines.linewidth: 0.8
+lines.markersize: 3.0
+lines.markeredgewidth: 0.8
+
+# Axes
+axes.spines.left: True
+axes.spines.bottom: True
+axes.spines.top: True
+axes.spines.right: True
+axes.linewidth: 0.5
+axes.grid: True
+
+# Grid
+grid.linewidth: 0.1
+
+# Axis
+xaxis.labellocation: center
+yaxis.labellocation: center
+
+# Tick Properties
+xtick.labelsize : 9
+ytick.labelsize : 9
+
+# x-axis
+xtick.top: False
+xtick.bottom: True
+xtick.direction: in
+
+# y-axis
+ytick.right: False
+ytick.left: True
+ytick.direction: in
+
+# x-axis
+xtick.major.size: 5
+xtick.major.width: 0.25
+xtick.minor.size: 1
+xtick.minor.width: 0.15
+
+# y-axis
+ytick.major.size: 5
+ytick.major.width: 0.25
+ytick.minor.size: 1
+ytick.minor.width: 0.15
+
+# tick pad
+# xtick.major.pad: -3
+# ytick.major.pad: -3
+
+# Legend Properties
+legend.fancybox: False
+legend.edgecolor: None
+legend.facecolor: white
+legend.framealpha: 0.8
+legend.loc: best
+
+# Saving figures
+savefig.bbox: tight
+savefig.pad_inches: 0.05
+savefig.dpi: 1000
