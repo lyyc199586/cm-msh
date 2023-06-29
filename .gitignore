@@ -1,5 +1,5 @@
 /.vscode
 /mesh
+**/__pycache__
 *.pyc
-*.cpython-310.pyc
 *.json
