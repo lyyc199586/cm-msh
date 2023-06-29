@@ -44,6 +44,12 @@ class HexPolyGenerator:
 
             return grain
         
+        def mark_boundary(dim):
+            eps = 1e-3
+            vin = gmsh.model.getEntitiesInBoundingBox(-eps, -eps, -eps, 1+eps, 1+eps, eps, dim)
+            bnds = gmsh.model.getBoundary(vin, False, False, True)
+            gmsh.model.mesh.setSize(bnds, size=self.mesh_size)
+        
         # define settings for grain width and spacing
         n_columns = int(sqrt(self.num_grains)) + 1
         n_rows = n_columns
@@ -67,13 +73,20 @@ class HexPolyGenerator:
         
         # fragment the grains to square
         entire, _ = gmsh.model.occ.fragment([(dim, square)], grains, removeObject=False)
-        gmsh.model.occ.intersect([(dim, square)], entire)
+        inter, _ = gmsh.model.occ.intersect([(dim, square)], entire)
         gmsh.model.occ.synchronize()
 
+        # set boundary
+        mark_boundary(dim)
+
         # generate and output
+        gmsh.option.setNumber("Mesh.Algorithm", 6)
         gmsh.model.mesh.generate(dim)
-        gmsh.model.mesh.optimize()
+        gmsh.model.mesh.optimize("Relocate2D", force=True, niter=3)
+        gmsh.option.setNumber("Mesh.RecombineAll", 1)
+        gmsh.option.setNumber("Mesh.RecombinationAlgorithm", 3)
         gmsh.model.mesh.recombine()
+        gmsh.model.mesh.optimize("QuadQuasiStructured", force=True, niter=3)
         gmsh.write(self.msh_dir)
 
         gmsh.finalize()
