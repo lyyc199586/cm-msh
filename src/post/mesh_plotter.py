@@ -3,8 +3,7 @@ from mpl_toolkits.mplot3d import Axes3D
 
 
 class MeshPlotter:
-    '''
-    plot gmsh4 format mesh
+    '''plot gmsh4 format mesh
     '''
 
     def __init__(self, mesh):
