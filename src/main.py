@@ -2,7 +2,7 @@
 from gen.mesh_generator import HexPolyGenerator
 
 num_grains = 16
-mesh_size = 0.1
+mesh_size = 0.025
 msh_file = "../mesh/hex_n{}_h{}.msh".format(num_grains, mesh_size)
 
 mesh_generator = HexPolyGenerator(num_grains, mesh_size, msh_file)
@@ -12,16 +12,20 @@ mesh_generator.gen()
 # %% plot
 import meshio
 import matplotlib.pyplot as plt
-from post.mesh_plotter import MeshPlotter
+from post.gmsh_plotter import GMSHPlotter
 
-msh_file = "../mesh/hex_n16_h0.1.msh"
-mesh = meshio.read(msh_file)
-mesh_plotter = MeshPlotter(mesh)
+num_grains = 16
+mesh_size = 0.025
+msh_file = "../mesh/hex_n{}_h{}.msh".format(num_grains, mesh_size)
+# mesh = meshio.read(msh_file)
+mesh_plotter = GMSHPlotter(msh_file)
 
 plt.style.use("../misc/elsevier.mplstyle")
-ax = mesh_plotter.plot(edgecolor='k', facecolor='None')
+ax = mesh_plotter.plot(lw=0.25)
 
 # %% save fig
-msh_plot = "../out/hex_n16_h0.1.png"
+num_grains = 16
+mesh_size = 0.025
+msh_plot = "../mesh/hex_n{}_h{}.png".format(num_grains, mesh_size)
 ax.figure.savefig(msh_plot)
 # %%

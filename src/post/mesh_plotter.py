@@ -4,6 +4,7 @@ from mpl_toolkits.mplot3d import Axes3D
 
 class MeshPlotter:
     '''plot gmsh4 format mesh
+        Args: meshio mesh
     '''
 
     def __init__(self, mesh):

@@ -2,18 +2,19 @@
 import meshio
 import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
-from mesh_plotter import MeshPlotter
+from gmsh_plotter import GMSHPlotter
 
 msh_file = "../../mesh/test.msh"
-mesh = meshio.read(msh_file)
-mesh_plotter = MeshPlotter(mesh)
+# mesh = meshio.read(msh_file)
+mesh_plotter = GMSHPlotter(msh_file)
 
 plt.style.use("../../misc/elsevier.mplstyle")
-fig, ax = plt.subplots()
-mesh_plotter.plot(ax=ax, edgecolor='k', facecolor='None', lw=0.5)
+ax = mesh_plotter.plot(lw=0.5)
+ax.set_xlim(0, 2)
+ax.set_ylim(0, 2)
 
 # %%
 save_dir = "../../out/"
-fig.savefig(save_dir + "test_mesh_plot.png")
+ax.figure.savefig(save_dir + "test_gmsh_plot.png")
 
 # %%
