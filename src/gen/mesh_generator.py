@@ -80,7 +80,7 @@ class HexPolyGenerator:
         mark_boundary(dim)
 
         # generate and output
-        gmsh.option.setNumber("Mesh.Algorithm", 6)
+        gmsh.option.setNumber("Mesh.Algorithm", 11)
         gmsh.model.mesh.generate(dim)
         gmsh.model.mesh.optimize("Relocate2D", force=True, niter=3)
         gmsh.option.setNumber("Mesh.RecombineAll", 1)
