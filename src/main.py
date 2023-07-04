@@ -14,8 +14,8 @@ import meshio
 import matplotlib.pyplot as plt
 from post.gmsh_plotter import GMSHPlotter
 
-# num_grains = 4
-# mesh_size = 0.025
+num_grains = 4
+mesh_size = 0.025
 msh_file = "../mesh/hex_n{}_h{}.msh".format(num_grains, mesh_size)
 # mesh = meshio.read(msh_file)
 mesh_plotter = GMSHPlotter(msh_file)

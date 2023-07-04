@@ -35,7 +35,7 @@ class GMSHPlotter:
 
         # Get nodes coords of mesh
         # coords: [x1, y1, z1, x2, y2, z2, ...]
-        node_tags, coords, _ = gmsh.model.mesh.getNodes()
+        _, coords, _ = gmsh.model.mesh.getNodes()
         coords = coords.reshape((-1, 3)) # [[x1, y1, z1], ...]
 
         # If no ax provided, create fig and ax
@@ -53,7 +53,7 @@ class GMSHPlotter:
                 ax.set_zlabel("$z$")
 
         # Create a colormap for faces in each entity
-        cmap = plt.get_cmap("tab10")
+        cmap = plt.get_cmap("Paired")
 
         # Plot over entites
         for entity in entities:
