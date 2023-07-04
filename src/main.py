@@ -26,6 +26,6 @@ ax = mesh_plotter.plot(lw=0.25)
 # %% save fig
 # num_grains = 4
 # mesh_size = 0.025
-msh_plot = "../mesh/hex_n{}_h{}.png".format(num_grains, mesh_size)
+msh_plot = "../out/hex_n{}_h{}.png".format(num_grains, mesh_size)
 ax.figure.savefig(msh_plot)
 # %%
