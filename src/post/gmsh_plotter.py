@@ -79,4 +79,5 @@ class GMSHPlotter:
                     face_nodes, closed=True, edgecolor='k', facecolor=face_colors, **kwargs)
                 ax.add_patch(face_collection)
 
+        gmsh.finalize()
         return ax
