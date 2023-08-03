@@ -49,6 +49,16 @@ class HexPolyGenerator:
             vin = gmsh.model.getEntitiesInBoundingBox(-eps, -eps, -eps, 1+eps, 1+eps, eps, dim)
             bnds = gmsh.model.getBoundary(vin, False, False, True)
             gmsh.model.mesh.setSize(bnds, size=self.mesh_size)
+            left_bnds = gmsh.model.getEntitiesInBoundingBox(-eps, -eps, -eps, eps, 1+eps, eps, dim-1)
+            right_bnds = gmsh.model.getEntitiesInBoundingBox(1-eps, -eps, -eps, 1+eps, 1+eps, eps, dim-1)
+            top_bnds = gmsh.model.getEntitiesInBoundingBox(-eps, 1-eps, -eps, 1+eps, 1+eps, eps, dim-1)
+            bottom_bnds = gmsh.model.getEntitiesInBoundingBox(-eps, -eps, -eps, 1+eps, eps, eps, dim-1)
+            gmsh.model.addPhysicalGroup(dim-1, [i[1] for i in left_bnds], tag=-1, name="left")
+            gmsh.model.addPhysicalGroup(dim-1, [i[1] for i in right_bnds], tag=-1, name="right")
+            gmsh.model.addPhysicalGroup(dim-1, [i[1] for i in top_bnds], tag=-1, name="top")
+            gmsh.model.addPhysicalGroup(dim-1, [i[1] for i in bottom_bnds], tag=-1, name="bottom")
+            
+            
         
         # define settings for grain width and spacing
         n_columns = int(sqrt(self.num_grains)) + 1
@@ -73,8 +83,13 @@ class HexPolyGenerator:
         
         # fragment the grains to square
         entire, _ = gmsh.model.occ.fragment([(dim, square)], grains, removeObject=False)
-        inter, _ = gmsh.model.occ.intersect([(dim, square)], entire)
+        inter, _ = gmsh.model.occ.intersect([(dim, square)], entire, removeObject=False)
         gmsh.model.occ.synchronize()
+        
+        # add physical groups
+        # gmsh.model.addPhysicalGroup(2, [square], tag=0, name="grain_0")
+        for i, block in enumerate(entire):
+            gmsh.model.addPhysicalGroup(2, [block[1]], tag=i+1, name=f"grain_{i+1}")
 
         # set boundary
         mark_boundary(dim)

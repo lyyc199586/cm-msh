@@ -1,7 +1,7 @@
-# %%
+# %% gen
 from gen.mesh_generator import HexPolyGenerator
 
-num_grains = 16
+num_grains = 4
 mesh_size = 0.025
 msh_file = "../mesh/hex_n{}_h{}.msh".format(num_grains, mesh_size)
 
