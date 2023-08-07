@@ -1,5 +1,5 @@
 # %% gen
-from gen.mesh_generator import HexPolyGenerator
+from gen.hex_poly_gen import HexPolyGenerator
 
 num_grains = 4
 mesh_size = 0.025
