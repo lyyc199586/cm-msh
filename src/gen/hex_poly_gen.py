@@ -105,6 +105,3 @@ class HexPolyGenerator:
         gmsh.write(self.msh_dir)
 
         gmsh.finalize()
-        
-
-class 
